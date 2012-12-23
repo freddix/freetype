@@ -1,14 +1,14 @@
 Summary:	TrueType font rasterizer
 Name:		freetype
-Version:	2.4.10
-Release:	2
+Version:	2.4.11
+Release:	1
 Epoch:		1
 License:	GPL or FTL
 Group:		Libraries
 Source0:	http://savannah.nongnu.org/download/freetype/%{name}-%{version}.tar.bz2
-# Source0-md5:	13286702e9390a91661f980608adaff1
+# Source0-md5:	b93435488942486c8d0ca22e8f768034
 Source1:	http://savannah.nongnu.org/download/freetype/%{name}-doc-%{version}.tar.bz2
-# Source1-md5:	2611613f2b1d0d846c6b33d49d4933ed
+# Source1-md5:	20f148103e069093f53584ce5ba16581
 URL:		http://www.freetype.org/
 BuildRequires:	automake
 BuildRequires:	python
