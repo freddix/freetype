@@ -1,16 +1,14 @@
-%define		dversion	2.5.0
+%define		dversion	2.5.1
 
 Summary:	TrueType font rasterizer
 Name:		freetype
-Version:	2.5.0.1
+Version:	2.5.1
 Release:	1
 Epoch:		1
 License:	GPL or FTL
 Group:		Libraries
-Source0:	http://savannah.nongnu.org/download/freetype/%{name}-%{version}.tar.bz2
-# Source0-md5:	c72e9010b1d986d556fc0b2b5fcbf31a
-Source1:	http://savannah.nongnu.org/download/freetype/%{name}-doc-%{dversion}.tar.bz2
-# Source1-md5:	40f3d5cc0b16396b3fb6b98eeaa053b2
+Source0:	http://downloads.sourceforge.net/sourceforge/freetype/%{name}-%{version}.tar.bz2
+# Source0-md5:	93eba7854094f46d7d98a9a2370af4d6
 URL:		http://www.freetype.org/
 BuildRequires:	automake
 BuildRequires:	python
@@ -40,18 +38,15 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Static freetype library.
 
 %prep
-%setup -q -a1
+%setup -q
 
 %build
 CFLAGS="%{rpmcflags} \
-	-DFT_CONFIG_OPTION_SUBPIXEL_RENDERING"	\
+	-DFT_CONFIG_OPTION_SUBPIXEL_RENDERING \
+	-DTT_CONFIG_OPTION_SUBPIXEL_HINTING"	\
 %{__make} setup unix \
 	CFG="--prefix=%{_prefix} --libdir=%{_libdir}"
-
-%{__make} \
-	X11_LIB=
-
-%{__make} refdoc
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -79,7 +74,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libfreetype.so
 %{_libdir}/libfreetype.la
 %{_includedir}/freetype2
-%{_includedir}/*.h
 %{_aclocaldir}/*.m4
 %{_pkgconfigdir}/*.pc
 
