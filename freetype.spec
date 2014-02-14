@@ -3,7 +3,7 @@
 Summary:	TrueType font rasterizer
 Name:		freetype
 Version:	2.5.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL or FTL
 Group:		Libraries
