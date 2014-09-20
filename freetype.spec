@@ -1,16 +1,19 @@
-%define		dversion	2.5.1
-
-Summary:	TrueType font rasterizer
+Summary:	TrueType font rendering library"
 Name:		freetype
-Version:	2.5.2
-Release:	2
+Version:	2.5.3
+Release:	1
 Epoch:		1
 License:	GPL or FTL
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/sourceforge/freetype/%{name}-%{version}.tar.bz2
-# Source0-md5:	10e8f4d6a019b124088d18bc26123a25
+# Source0-md5:	d6b60f06bfc046e43ab2a6cbfd171d65
+Patch0:		%{name}-enable-valid.patch
+Patch1:		%{name}-options.patch
 URL:		http://www.freetype.org/
 BuildRequires:	automake
+BuildRequires:	bzip2-devel
+#BuildRequires:	harfbuzz-devel
+BuildRequires:	libpng-devel
 BuildRequires:	python
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -24,36 +27,30 @@ variety of platforms and environments.
 Summary:	Header files and development documentation
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	bzip2-devel
 
 %description devel
 This package includes the header files and documentation necessary to
 develop applications that use FreeType.
 
-%package static
-Summary:	Static freetype library
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-
-%description static
-Static freetype library.
-
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
+echo
 %build
-CFLAGS="%{rpmcflags} \
-	-DFT_CONFIG_OPTION_SUBPIXEL_RENDERING \
-	-DTT_CONFIG_OPTION_SUBPIXEL_HINTING"	\
-%{__make} setup unix \
-	CFG="--prefix=%{_prefix} --libdir=%{_libdir}"
+%configure \
+    --disable-static
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,12 +69,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/DEBUG docs/reference
 %attr(755,root,root) %{_bindir}/freetype-config
 %attr(755,root,root) %{_libdir}/libfreetype.so
-%{_libdir}/libfreetype.la
 %{_includedir}/freetype2
 %{_aclocaldir}/*.m4
 %{_pkgconfigdir}/*.pc
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_mandir}/man1/freetype-config.1*
 
