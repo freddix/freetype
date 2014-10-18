@@ -1,12 +1,30 @@
 diff -aurN freetype-2.5.3.orig/include/config/ftoption.h freetype-2.5.3/include/config/ftoption.h
---- freetype-2.5.3.orig/include/config/ftoption.h	2014-09-20 20:44:01.343752624 +0200
-+++ freetype-2.5.3/include/config/ftoption.h	2014-09-20 20:44:44.008681529 +0200
+--- freetype-2.5.3.orig/include/config/ftoption.h	2014-10-01 20:24:34.000000000 +0200
++++ freetype-2.5.3/include/config/ftoption.h	2014-10-01 20:40:18.000000000 +0200
 @@ -92,7 +92,7 @@
    /* This is done to allow FreeType clients to run unmodified, forcing     */
    /* them to display normal gray-level anti-aliased glyphs.                */
    /*                                                                       */
 -/* #define FT_CONFIG_OPTION_SUBPIXEL_RENDERING */
 +#define FT_CONFIG_OPTION_SUBPIXEL_RENDERING
+ 
+ 
+   /*************************************************************************/
+@@ -238,7 +238,7 @@
+   /*                                                                       */
+   /*   Define this macro if you want to enable this `feature'.             */
+   /*                                                                       */
+-/* #define FT_CONFIG_OPTION_USE_HARFBUZZ */
++#define FT_CONFIG_OPTION_USE_HARFBUZZ
+ 
+ 
+   /*************************************************************************/
+@@ -604,7 +604,7 @@
+   /*   This option requires TT_CONFIG_OPTION_BYTECODE_INTERPRETER to be    */
+   /*   defined.                                                            */
+   /*                                                                       */
+-/* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING */
++#define TT_CONFIG_OPTION_SUBPIXEL_HINTING
  
  
    /*************************************************************************/
